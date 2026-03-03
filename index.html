@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAB Bangunan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Aplikasi RAB Bangunan</h1>
+      <p>Versi detail: input pekerjaan, hitung otomatis, rekap, export CSV, print, dan autosave LocalStorage.</p>
+    </header>
+
+    <section class="card project-card">
+      <h2>Informasi Proyek</h2>
+      <div class="grid project-grid">
+        <label>
+          Nama Proyek
+          <input type="text" id="project-name" placeholder="Contoh: Renovasi Rumah Bapak Andi" />
+        </label>
+        <label>
+          Lokasi
+          <input type="text" id="project-location" placeholder="Contoh: Bandung" />
+        </label>
+      </div>
+      <small class="muted">Informasi ini ikut disimpan ke LocalStorage dan masuk ke file export CSV.</small>
+    </section>
+
+    <section class="card form-card">
+      <h2>Tambah Item Pekerjaan</h2>
+      <form id="rab-form">
+        <div class="grid">
+          <label>
+            Kategori
+            <input type="text" id="kategori" placeholder="Contoh: Pekerjaan Dinding" required />
+          </label>
+          <label>
+            Nama Item
+            <input type="text" id="nama" placeholder="Contoh: Pasang Bata Ringan" required />
+          </label>
+          <label>
+            Panjang (m)
+            <input type="number" id="panjang" min="0" step="0.01" required />
+          </label>
+          <label>
+            Lebar (m)
+            <input type="number" id="lebar" min="0" step="0.01" required />
+          </label>
+          <label>
+            Tinggi (m)
+            <input type="number" id="tinggi" min="0" step="0.01" required />
+          </label>
+          <label>
+            Koefisien
+            <input type="number" id="koefisien" min="0" step="0.01" value="1" required />
+          </label>
+          <label>
+            Satuan
+            <input type="text" id="satuan" placeholder="Contoh: m3 / m2 / unit" value="m3" required />
+          </label>
+          <label>
+            Harga Satuan (Rp)
+            <input type="number" id="harga" min="0" step="1" required />
+          </label>
+          <label class="full-width">
+            Keterangan (opsional)
+            <input type="text" id="keterangan" placeholder="Contoh: Termasuk perekat & transport" />
+          </label>
+        </div>
+        <button type="submit">Tambah Item</button>
+      </form>
+    </section>
+
+    <section class="card recap-card">
+      <h2>Ringkasan Cepat</h2>
+      <div class="recap-grid">
+        <article>
+          <span>Total Item</span>
+          <strong id="total-item">0</strong>
+        </article>
+        <article>
+          <span>Total Volume Dasar</span>
+          <strong id="total-volume">0.00 m³</strong>
+        </article>
+        <article>
+          <span>Total Qty (Volume × Koefisien)</span>
+          <strong id="total-qty">0.00</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <div class="toolbar">
+        <h2>Daftar RAB Detail</h2>
+        <div class="actions">
+          <button id="export-csv" type="button">Export Excel (CSV)</button>
+          <button id="print-pdf" type="button">Print PDF</button>
+          <button id="clear-all" type="button" class="danger">Hapus Semua</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Kategori</th>
+              <th>Item Pekerjaan</th>
+              <th>P</th>
+              <th>L</th>
+              <th>T</th>
+              <th>Volume</th>
+              <th>Koef.</th>
+              <th>Qty</th>
+              <th>Satuan</th>
+              <th>Harga Satuan</th>
+              <th>Total</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="item-body"></tbody>
+        </table>
+      </div>
+
+      <footer class="summary">
+        <span>Grand Total:</span>
+        <strong id="grand-total">Rp 0</strong>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
